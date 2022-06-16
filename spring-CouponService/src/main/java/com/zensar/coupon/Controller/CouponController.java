@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.coupon.Service.CouponService;
 import com.zensar.coupon.dto.CouponDto;
+import com.zensar.coupon.entity.Coupon;
 
 @RestController
 @RequestMapping(value = "/coupon-api", produces = { MediaType.APPLICATION_JSON_VALUE,
@@ -36,10 +38,10 @@ public class CouponController {
 
 
 	@GetMapping(value = "/coupons")
-	// public List<CouponDto> getCoupons() {
-	public ResponseEntity<List<CouponDto>> getCoupons() {
+	//public List<CouponDto> getCoupons() {
+	public ResponseEntity<List<CouponDto>> getCoupons(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize) {
 		// return couponService.getCoupons();
-		return new ResponseEntity<List<CouponDto>>(couponService.getCoupons(), HttpStatus.OK);
+		return new ResponseEntity<List<CouponDto>>(couponService.getCoupons(pageNumber, pageSize), HttpStatus.OK);
 	}
 
 //	@PostMapping(value = "/coupons",consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
@@ -67,5 +69,14 @@ public class CouponController {
 	public ResponseEntity<String> deleteCoupon(@PathVariable("couponId") int CouponId) {
 		couponService.deleteCoupon(CouponId);
 		return new ResponseEntity<String>("Coupon deleted Succesfully", HttpStatus.OK);
+	}
+	@GetMapping(value = "/coupons/{couponCode}")
+	public List<Coupon> getByCouponCode(@PathVariable("couponCode") String couponCode) {
+		// TODO Auto-generated method stub
+		return couponService.getByCouponCode(couponCode);
+	}
+	public List<Coupon> findByCouponCodeAndCouponPurpose(String couponCode, String couponPurpose) {
+		// TODO Auto-generated method stub
+		return couponService.findByCouponCodeAndCouponPurpose(couponCode,couponPurpose);
 	}
 }

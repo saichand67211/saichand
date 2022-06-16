@@ -2,8 +2,13 @@ package com.zensar.coupon.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries(value = {@NamedQuery(name="Coupon.test", query = "from Coupon c where c.couponCode=?1"),
+@NamedQuery(name="Coupon.test1", query = "from Coupon c where c.couponCode=?1 and s.conponPurpose=?2")})
+
 public class Coupon {
 	@Id
 	private int couponId;
