@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.coupon.Service.CouponService;
 import com.zensar.coupon.dto.CouponDto;
-import com.zensar.coupon.entity.Coupon;
 
 @RestController
 @RequestMapping(value = "/coupon-api", produces = { MediaType.APPLICATION_JSON_VALUE,
@@ -70,7 +69,7 @@ public class CouponController {
 		couponService.deleteCoupon(CouponId);
 		return new ResponseEntity<String>("Coupon deleted Succesfully", HttpStatus.OK);
 	}
-	@GetMapping(value = "/coupons/{couponCode}")
+	/*@GetMapping(value = "/coupons/{couponCode}")
 	public List<Coupon> getByCouponCode(@PathVariable("couponCode") String couponCode) {
 		// TODO Auto-generated method stub
 		return couponService.getByCouponCode(couponCode);
@@ -78,5 +77,5 @@ public class CouponController {
 	public List<Coupon> findByCouponCodeAndCouponPurpose(String couponCode, String couponPurpose) {
 		// TODO Auto-generated method stub
 		return couponService.findByCouponCodeAndCouponPurpose(couponCode,couponPurpose);
-	}
+	}*/
 }

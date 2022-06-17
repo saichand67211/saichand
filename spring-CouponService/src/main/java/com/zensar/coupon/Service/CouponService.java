@@ -8,8 +8,8 @@ import com.zensar.coupon.entity.Coupon;
 
 public interface CouponService {
 	public CouponDto getCoupon(int couponId);
-	List<Coupon>findByCouponCode(String couponCode);
-	List<Coupon>findByCouponCodeAndCouponPurpose(String couponCode,String couponPurpose);
+	//List<Coupon>findByCouponCode(String couponCode);
+	//List<Coupon>findByCouponCodeAndCouponPurpose(String couponCode,String couponPurpose);
 	//List<Coupon>testCouponCode(String couponCode);
 	
 	List<Coupon>getByCouponCode(String couponCode);

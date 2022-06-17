@@ -7,11 +7,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.zensar.coupon.dto.CouponDto;
 import com.zensar.coupon.entity.Coupon;
 import com.zensar.coupon.repository.CouponRepository;
+
 
 @Service
 public class CouponServiceImpl implements CouponService {
@@ -35,7 +38,8 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponDto> getCoupons(int pageNumber, int pageSize) {
 		// List<Coupon> listOfCoupons = couponRepository.findAll();
 		List<CouponDto> listOfCouponDto = new ArrayList<CouponDto>();
-		Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber, pageSize));
+		//Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber, pageSize,Sort.by("couponCode")));
+		Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(0,3, Sort.by(Direction.DESC, "couponPurpose")));
 		List<Coupon> content = findAll.getContent();
 		for (Coupon coupon : content) {
 			// listOfCouponDto.add(mapToDto(coupon));
@@ -88,17 +92,17 @@ public class CouponServiceImpl implements CouponService {
 		return couponRepository.getByCouponCode(couponCode);
 	}
 
-	@Override
+	/*@Override
 	public List<Coupon> findByCouponCode(String couponCode) {
 		// TODO Auto-generated method stub
 		return couponRepository.findByCouponCode(couponCode);
 	}
-
-	@Override
+*/
+	/*@Override
 	public List<Coupon> findByCouponCodeAndCouponPurpose(String couponCode, String couponPurpose) {
 		// TODO Auto-generated method stub
 		return couponRepository.findByCouponCodeAndCouponPurpose(couponCode, couponPurpose);
-	}
+	}*/
 
 	/*
 	 * public Coupon mapToEntity(CouponDto couponDto) { Coupon coupon = new
