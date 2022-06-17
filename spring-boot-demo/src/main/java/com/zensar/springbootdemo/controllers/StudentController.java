@@ -61,7 +61,7 @@ public class StudentController {
 	@PostMapping(value = "/students")
 	public ResponseEntity<StudentDto> insertStudent(@RequestBody StudentDto studentDto) {
 
-		return new ResponseEntity<StudentDto>(studentService.insertStudent(studentDto), HttpStatus.CREATED);
+		return new ResponseEntity<StudentDto>(studentService.insertStudent(studentDto), HttpStatus.OK);
 		// return studentService.insertStudent(studentDto);
 
 		// System.out.println("Hi");
@@ -89,4 +89,13 @@ public class StudentController {
 		return new ResponseEntity<String>("Student deleted successfully ", HttpStatus.OK);
 
 	}
+	/*@GetMapping("/students/name/{studentName}")
+	public List<Student> getByStudentName(@PathVariable("studentName") String studentName){
+		return studentService.test(studentName);
+	}
+	public List<Student> findByStudentNameAndStudentAge(@PathVariable("studentName") String studentName, @PathVariable("studentAge") int studentAge) {
+		// TODO Auto-generated method stub
+		return studentService.test1(studentName, studentAge);
+	}*/
+
 }

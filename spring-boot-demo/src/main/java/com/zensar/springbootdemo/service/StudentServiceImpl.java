@@ -2,8 +2,10 @@ package com.zensar.springbootdemo.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.zensar.springbootdemo.dto.StudentDto;
@@ -12,45 +14,57 @@ import com.zensar.springbootdemo.repository.StudentRepository;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
 	@Autowired
 	private StudentRepository studentRepository;
 
-	@Override
-	public StudentDto getStudent(int studentId) {
+	@Autowired
+	private ModelMapper modelMapper;
 
-		Student student = studentRepository.findById(studentId).get();
-
-		StudentDto dto = mapToDto(student);
-		return dto;
+	public StudentServiceImpl() {
 	}
 
 	@Override
-	public List<StudentDto> getAllStudents() {
-		List<Student> listofStudents = studentRepository.findAll();
-		List<StudentDto> listofStudentDto = new ArrayList<StudentDto>();
+	public StudentDto getStudent(int studentId) {
+		Student getStudent = studentRepository.findById(studentId).get();
+		return modelMapper.map(getStudent, StudentDto.class);
+		// return mapToDto(getCoupon);
+	}
 
-		for (Student student : listofStudents) {
-			listofStudentDto.add(mapToDto(student));
+	@Override
+	public List<StudentDto> getAllStudent() {
+		List<Student> listOfStudents = studentRepository.findAll();
+		List<StudentDto> listOfStudentDto = new ArrayList<StudentDto>();
+
+		for (Student student : listOfStudents) {
+			// listOfCouponDto.add(mapToDto(coupon));
+			listOfStudentDto.add(modelMapper.map(student, StudentDto.class));
 		}
-		return listofStudentDto;
+		return listOfStudentDto;
 	}
 
 	@Override
 	public StudentDto insertStudent(StudentDto studentDto) {
 
-		Student student = mapToEntity(studentDto);
+		Student student = modelMapper.map(studentDto, Student.class);
 		Student insertedStudent = studentRepository.save(student);
+		// return mapToDto(insertedCoupon);
+		return modelMapper.map(insertedStudent, StudentDto.class);
 
-		StudentDto mapToDto = mapToDto(insertedStudent);
-
-		return mapToDto;
-
+		/*
+		 * Student student = mapToEntity(studentDto); Student insertedStudent =
+		 * studentRepository.save(student);
+		 * 
+		 * StudentDto mapToDto = mapToDto(insertedStudent);
+		 * 
+		 * return mapToDto;
+		 */
 	}
 
 	@Override
 	public void updateStudent(int studentId, StudentDto studentDto) {
 
-		Student student = mapToEntity(studentDto);
+		Student student = modelMapper.map(studentDto, Student.class);
 		studentRepository.save(student);
 
 	}
@@ -61,22 +75,33 @@ public class StudentServiceImpl implements StudentService {
 
 	}
 
-	public StudentDto mapToDto(Student student) {
-		StudentDto dto = new StudentDto();
-		dto.setStudentIdDto(student.getStudentId());
-		dto.setStudentNameDto(student.getStudentName());
-		dto.setStudentAgeDto(student.getStudentAge());
-
-		return dto;
-
+	@Override
+	public List<StudentDto> getAllStudents() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public Student mapToEntity(StudentDto studentDto) {
-		Student student = new Student();
-		student.setStudentId(studentDto.getStudentIdDto());
-		student.setStudentName(studentDto.getStudentNameDto());
-		student.setStudentAge(studentDto.getStudentAgeDto());
-		return student;
-	}
-
+	/*
+	 * public StudentDto mapToDto(Student student) { StudentDto dto = new
+	 * StudentDto(); dto.setStudentId(student.getStudentId());
+	 * dto.setStudentName(student.getStudentName());
+	 * dto.setStudentAge(student.getStudentAge());
+	 * 
+	 * return dto;
+	 * 
+	 * }
+	 * 
+	 * public Student mapToEntity(StudentDto studentDto) { Student student = new
+	 * Student(); student.setStudentId(studentDto.getStudentId());
+	 * student.setStudentName(studentDto.getStudentName());
+	 * student.setStudentAge(studentDto.getStudentAge()); return student; }
+	 */
+	/*
+	 * @Override public List<Student> test(String studentName) { // TODO
+	 * Auto-generated method stub return studentRepository.test(studentName); }
+	 * 
+	 * @Override public List<Student> test1(String studentName, int studentAge) { //
+	 * TODO Auto-generated method stub return studentRepository.test1(studentName,
+	 * studentAge); }
+	 */
 }

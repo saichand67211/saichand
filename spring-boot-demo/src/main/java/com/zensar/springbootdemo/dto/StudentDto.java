@@ -1,40 +1,40 @@
 package com.zensar.springbootdemo.dto;
 
 public class StudentDto {
-	private int studentIdDto;
-	private String studentNameDto;
-	private int studentAgeDto;
+	private int studentId;
+	private String studentName;
+	private int studentAge;
 	public StudentDto() {
 		super();
 	}
-	private StudentDto(int studentIdDto, String studentNameDto, int studentAgeDto) {
+	private StudentDto(int studentId, String studentName, int studentAge) {
 		super();
-		this.studentIdDto = studentIdDto;
-		this.studentNameDto = studentNameDto;
-		this.studentAgeDto = studentAgeDto;
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentAge = studentAge;
 	}
-	public int getStudentIdDto() {
-		return studentIdDto;
+	public int getStudentId() {
+		return studentId;
 	}
-	public void setStudentIdDto(int studentIdDto) {
-		this.studentIdDto = studentIdDto;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
-	public String getStudentNameDto() {
-		return studentNameDto;
+	public String getStudentName() {
+		return studentName;
 	}
-	public void setStudentNameDto(String studentNameDto) {
-		this.studentNameDto = studentNameDto;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
-	public int getStudentAgeDto() {
-		return studentAgeDto;
+	public int getStudentAge() {
+		return studentAge;
 	}
-	public void setStudentAgeDto(int studentAgeDto) {
-		this.studentAgeDto = studentAgeDto;
+	public void setStudentAge(int studentAge) {
+		this.studentAge = studentAge;
 	}
 	@Override
 	public String toString() {
-		return "StudentDto [studentIdDto=" + studentIdDto + ", studentNameDto=" + studentNameDto + ", studentAgeDto="
-				+ studentAgeDto + "]";
+		return "StudentDto [studentId=" + studentId + ", studentName=" + studentName + ", studentAge=" + studentAge
+				+ "]";
 	}
-
+	
 }
