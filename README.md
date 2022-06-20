@@ -1,5 +1,14 @@
 # saichand
 
+Product Service:
+URL:http://localhost:1000/product-api/products
+Default page:0
+Default size:5
+
+
+
+
+
 output:Coupon
 -----------------------------------
 <List>
